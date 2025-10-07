@@ -15,11 +15,18 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">SportConnect Platform</h1>
-      <p className="mt-4 text-lg text-gray-700">
-        Connect with sporters, plan activities, and have fun.
-      </p>
+    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+      {/* 🔥 Background Video */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/So-Win-Nike_Media_b0Ezn5pZE7o_001_1080p.mp4" type="video/mp4" />
+        </video>
 
       {session ? (
         <>
@@ -44,6 +51,9 @@ export default function Home() {
           </a>
         </>
       )}
+        {/* Dark overlay for text contrast */}
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
     </main>
   )
 }
