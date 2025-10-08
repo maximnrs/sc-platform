@@ -38,8 +38,8 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-black text-white">
-        <p>Loading profile...</p>
+      <main className="flex min-h-screen items-center justify-center bg-black">
+        <p className="text-gray-400">Loading...</p>
       </main>
     );
   }

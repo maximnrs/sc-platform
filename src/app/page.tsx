@@ -8,7 +8,7 @@ export default function Home() {
 
   if (status === "loading") {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-black">
         <p className="text-gray-400">Loading...</p>
       </main>
     )
