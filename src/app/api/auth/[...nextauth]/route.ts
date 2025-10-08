@@ -13,35 +13,56 @@ const handler = NextAuth({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null
+        if (!credentials?.email || !credentials?.password) return null;
 
-        // find user in database
+        // Find user in database
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
-        })
+        });
 
-        if (!user) return null
+        if (!user) return null;
 
-        // compare passwords
-        const isValid = await compare(credentials.password, user.password)
-        if (!isValid) return null
+        // Compare passwords
+        const isValid = await compare(credentials.password, user.password);
+        if (!isValid) return null;
 
         return {
           id: user.id,
           name: user.name,
           email: user.email,
-        }
-      }
-    })
+        };
+      },
+    }),
   ],
-  // ✅ required for credentials provider
+
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
-})
 
-export { handler as GET, handler as POST }
+  callbacks: {
+    // Add the user ID and name to the token
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+      }
+      return token;
+    },
+
+    // Add the user ID and name to the session
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name;
+      }
+      return session;
+    },
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
+});
+
+export { handler as GET, handler as POST };

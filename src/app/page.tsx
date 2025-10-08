@@ -46,6 +46,12 @@ export default function Home() {
 
         {session ? (
           <div className="mt-8 space-y-4">
+            <a
+              href={`/profile/${session.user.id}`}
+              className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
+            >
+              View Profile
+            </a>
             <p className="text-gray-100 text-lg">
               Welcome back, <span className="font-semibold">{session.user?.name}</span>!
             </p>

@@ -11,15 +11,16 @@ generator client {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  password  String?   // hashed password for email/password login
-  createdAt DateTime @default(now())
+  id         String     @id @default(cuid())
+  name       String?
+  email      String     @unique
+  password   String?
+  createdAt  DateTime   @default(now())
 
-  bio       String?
-  sport     String?
-  location  String?
+  bio        String?
+  sport      String?
+  location   String?
+  image      String?    // optional field for future profile pics
   activities Activity[]
 }
 
