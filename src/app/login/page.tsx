@@ -15,53 +15,79 @@ export default function LoginPage() {
     setError("")
 
     const res = await signIn("credentials", {
-      redirect: false, // we handle redirection manually
+      redirect: false,
       email,
-      password
+      password,
     })
 
     if (res?.error) {
       setError("Invalid email or password")
     } else {
-      router.push("/") // redirect after successful login
+      router.push("/")
     }
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden text-white">
+      {/* 🎥 Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/videos/SO-WIN.mp4" type="video/mp4" />
+      </video>
+
+      {/* 🖤 Overlay */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* 💎 Login Form */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+        className="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl animate-fadeIn"
       >
-        <h1 className="text-2xl font-bold mb-6 text-center text-gray-600">Login</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center text-white tracking-tight">
+          Welcome Back
+        </h1>
 
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {error && <p className="text-red-400 mb-4 text-center">{error}</p>}
 
-        <label className="block mb-2 text-gray-600">Email</label>
+        <label className="block mb-2 text-gray-300">Email</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mb-4 text-gray-600"
+          className="w-full p-3 mb-4 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+          placeholder="Enter your email"
           required
         />
 
-        <label className="block mb-2 text-gray-600">Password</label>
+        <label className="block mb-2 text-gray-300">Password</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mb-6 text-gray-600"
+          className="w-full p-3 mb-6 rounded bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+          placeholder="Enter your password"
           required
         />
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+          className="w-full bg-green-600 hover:bg-green-800 hover:text-gray-200 text-white font-semibold py-3 rounded-lg transition-all duration-300"
         >
-          Login
+          Log In
         </button>
+
+        <p className="mt-4 text-center text-gray-300">
+          Don’t have an account?{" "}
+          <a href="/register" className="text-green-400 hover:underline">
+            Register
+          </a>
+        </p>
       </form>
-    </div>
+    </main>
   )
 }
