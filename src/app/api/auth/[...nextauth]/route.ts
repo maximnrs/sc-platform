@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
@@ -6,7 +6,8 @@ import { compare } from "bcryptjs"
 
 const prisma = new PrismaClient()
 
-const handler = NextAuth({
+// ✅ Export this object so you can import it in other API routes (like /profile/update)
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -16,24 +17,22 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+        if (!credentials?.email || !credentials?.password) return null
 
-        // Find user in database
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
-        });
+        })
 
-        if (!user) return null;
+        if (!user) return null
 
-        // Compare passwords
-        const isValid = await compare(credentials.password, user.password);
-        if (!isValid) return null;
+        const isValid = await compare(credentials.password, user.password)
+        if (!isValid) return null
 
         return {
           id: user.id,
           name: user.name,
           email: user.email,
-        };
+        }
       },
     }),
   ],
@@ -43,26 +42,30 @@ const handler = NextAuth({
   },
 
   callbacks: {
-    // Add the user ID and name to the token
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.name = user.name;
+        token.id = user.id
+        token.name = user.name
       }
-      return token;
+      return token
     },
 
-    // Add the user ID and name to the session
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id;
-        session.user.name = token.name;
+        // Extend session user to include id and name
+        session.user = {
+          ...session.user,
+          id: token.id as string,
+          name: token.name,
+        }
       }
-      return session;
+      return session
     },
   },
 
   secret: process.env.NEXTAUTH_SECRET,
-});
+}
 
-export { handler as GET, handler as POST };
+// ✅ Create the handler using NextAuth and export GET/POST
+const handler = NextAuth(authOptions)
+export { handler as GET, handler as POST }
