@@ -78,7 +78,7 @@ export default function ProfilePage() {
 
         <h1 className="text-4xl font-bold">{user.name || "Username not set"}</h1>
         <p className="mt-2 text-gray-300">{user.sport || "Sport not set"}</p>
-        <p className="text-gray-400">{user.location || "Location unknown"}</p>
+        <p className="text-gray-400">📍{user.location || "Location unknown"}</p>
         <p className="mt-4 max-w-lg mx-auto text-gray-200">{user.bio || "No bio yet."}</p>
 
         <h2 className="mt-10 text-2xl font-semibold">Activities</h2>
