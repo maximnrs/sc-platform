@@ -46,7 +46,7 @@ export default function Home() {
         </p>
 
         {session ? (
-          <div className="mt-8 space-y-4">
+          <div className="space-y-4">
             <Link
               href={`/profile/${session.user.id}`}
               className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
