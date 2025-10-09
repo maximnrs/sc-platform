@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useEffect, useState } from "react"
+import { useParams } from "next/navigation"
+import Link from "next/link"
 
 interface Activity {
   id: string;
@@ -99,6 +100,13 @@ export default function ProfilePage() {
             <p className="text-gray-400">No activities yet.</p>
           )}
         </div>
+        <div className="mt-10">
+          <Link
+            href="/profile/edit"
+            className="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition mx-4"
+          >
+            Edit Profile
+          </Link>
       </div>
     </main>
   );

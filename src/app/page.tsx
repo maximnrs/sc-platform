@@ -53,12 +53,6 @@ export default function Home() {
             >
               View Profile
             </Link>
-            <Link
-              href="/profile/edit"
-              className="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-            >
-              Edit Profile
-            </Link>
             <p className="text-gray-100 text-lg">
               Welcome back, <span className="font-semibold">{session.user?.name}</span>!
             </p>
