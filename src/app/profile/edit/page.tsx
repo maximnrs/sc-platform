@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export default function EditProfilePage() {
   const { data: session } = useSession()
@@ -124,12 +125,12 @@ export default function EditProfilePage() {
         </button>
 
         <p className="mt-4 text-center text-gray-300">
-          <a
-            href="/profile"
+          <Link
+            href={`/profile/${session.user.id}`}
             className="text-green-400 hover:underline transition"
           >
             ← Back to profile
-          </a>
+          </Link>
         </p>
       </form>
     </main>

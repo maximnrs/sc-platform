@@ -1,6 +1,7 @@
 "use client"
 
 import { useSession } from "next-auth/react"
+import Link from "next/link"
 import LogoutButton from "@/components/LogoutButton"
 
 export default function Home() {
@@ -46,18 +47,18 @@ export default function Home() {
 
         {session ? (
           <div className="mt-8 space-y-4">
-            <a
+            <Link
               href={`/profile/${session.user.id}`}
               className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
             >
               View Profile
-            </a>
-            <a
+            </Link>
+            <Link
               href="/profile/edit"
               className="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
             >
               Edit Profile
-            </a>
+            </Link>
             <p className="text-gray-100 text-lg">
               Welcome back, <span className="font-semibold">{session.user?.name}</span>!
             </p>
@@ -65,18 +66,18 @@ export default function Home() {
           </div>
         ) : (
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <Link
               href="/register"
               className="px-6 py-3 bg-green-600 text-white text-lg rounded-full hover:bg-transparent hover:text-green-600 hover:border-2 hover:border-green-600 border-transparent border-2 transition-all duration-300 shadow-lg"
             >
               Get Started
-            </a>
-            <a
+            </Link>
+            <Link
               href="/login"
               className="px-6 py-3 bg-transparent border-2 border-white text-white text-lg rounded-full hover:bg-white hover:text-black transition-all duration-300"
             >
               Login
-            </a>
+            </Link>
           </div>
         )}
       </div>
