@@ -34,7 +34,7 @@ export default function EditProfilePage() {
 
     if (res.ok) {
       setMessage("✅ Profile updated successfully!")
-      setTimeout(() => router.push("/profile"), 1000)
+      setTimeout(() => router.push(`/profile/${session.user.id}`), 1500)
     } else {
       setMessage("❌ Failed to update profile.")
     }
