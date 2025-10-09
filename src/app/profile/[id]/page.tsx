@@ -107,6 +107,13 @@ export default function ProfilePage() {
           >
             Edit Profile
           </Link>
+          <Link
+            href="/"
+            className="text-green-400 hover:underline transition"
+          >
+            ← Back to Home
+          </Link>
+        </div>
       </div>
     </main>
   );
