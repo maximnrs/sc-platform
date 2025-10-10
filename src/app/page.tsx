@@ -53,6 +53,12 @@ export default function Home() {
             >
               View Profile
             </Link>
+            <Link
+              href={`/activities/create`}
+              className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
+            >
+              Create Activity
+            </Link>
             <p className="text-gray-100 text-lg">
               Welcome back, <span className="font-semibold">{session.user?.name}</span>!
             </p>
