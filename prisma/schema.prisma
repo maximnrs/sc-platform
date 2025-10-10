@@ -27,6 +27,7 @@ model User {
 model Activity {
   id          String   @id @default(cuid())
   title       String
+  sport       String
   location    String
   date        DateTime
   description String?
