@@ -25,8 +25,8 @@ export default function CreateActivityPage() {
     })
 
     if (res.ok) {
-      setMessage("Activity created successfully!")
-      router.push("/profile")
+      setMessage("✅ Activity created successfully!")
+      setTimeout(() => router.push(`/activities`), 1500)
     } else {
       const data = await res.json()
       setError(data.error || "Failed to create activity")
