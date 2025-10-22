@@ -79,6 +79,10 @@ export default function ActivitiesPage() {
                 <p className="text-gray-300 mt-1">{activity.location}</p>
                 <p className="text-gray-400 mt-2 text-sm">
                   {new Date(activity.date).toLocaleDateString()}
+
+                {activity.creator?.name && (
+                <p className="mt-4 text-sm text-gray-400 italic">
+                  Hosted by <span className="text-gray-200">{activity.creator.name}</span>
                 </p>
               </div>
             ))}
