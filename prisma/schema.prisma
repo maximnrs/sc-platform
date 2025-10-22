@@ -25,10 +25,12 @@ model User {
 }
 
 model Activity {
-  id        String   @id @default(cuid())
-  title     String
-  location  String
-  date      DateTime
-  createdBy String
-  creator   User     @relation(fields: [createdBy], references: [id])
+  id          String   @id @default(cuid())
+  title       String
+  sport       String
+  location    String
+  date        DateTime
+  description String?
+  createdBy   String
+  creator     User     @relation(fields: [createdBy], references: [id])
 }
