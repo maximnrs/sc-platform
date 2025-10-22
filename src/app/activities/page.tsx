@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 interface Activity {
   id: string
@@ -63,7 +64,15 @@ export default function ActivitiesPage() {
       <div className="absolute inset-0 bg-black/60"></div>
 
       <div className="relative z-10 p-8 max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold tracking-tight mb-8">Activities</h1>
+        <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold tracking-tight">Activities</h1>
+          <Link
+            href={`/activities/create`}
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-all"
+          >
+            + Create Activity
+          </Link>
+        </div>
 
         {activities.length === 0 ? (
           <p className="text-gray-300">No activities found.</p>
@@ -72,22 +81,38 @@ export default function ActivitiesPage() {
             {activities.map((activity) => (
               <div
                 key={activity.id}
-                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl"
+                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:bg-white/20 transition-all duration-300"
               >
-                <h2 className="text-2xl font-semibold mb-2">{activity.title}</h2>
+                <h2 className="text-2xl font-semibold mb-1">{activity.title}</h2>
                 <p className="text-green-300 font-medium">{activity.sport}</p>
-                <p className="text-gray-300 mt-1">{activity.location}</p>
-                <p className="text-gray-400 mt-2 text-sm">
+
+                <div className="mt-3">
+                <p className="text-gray-300 text-sm">
+                  📍 <span className="text-gray-200">{activity.location}</span>
+                </p>
+                <p className="text-gray-300 text-sm">
+                  📅{" "}
+                  <span className="text-gray-200">
                   {new Date(activity.date).toLocaleDateString()}
+                  </span>
+                </p>
+                </div>
 
                 {activity.creator?.name && (
                 <p className="mt-4 text-sm text-gray-400 italic">
                   Hosted by <span className="text-gray-200">{activity.creator.name}</span>
                 </p>
+                )}
               </div>
             ))}
           </div>
         )}
+        <Link
+          href={`/`}
+          className="text-green-400 hover:underline transition mt-4 inline-block"
+        >
+          ← Back to main
+        </Link>
       </div>
     </main>
   )
