@@ -41,7 +41,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-black">
-        <p className="text-gray-400">Loading...</p>
+        <p className="text-gray-400">Loading profile...</p>
       </main>
     );
   }

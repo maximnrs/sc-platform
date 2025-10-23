@@ -41,7 +41,7 @@ export default function ActivitiesPage() {
 
   if (loading) {
     return (
-      <main className="flex min-h-screen items-center justify-center text-white">
+      <main className="flex min-h-screen items-center justify-center text-gray-400">
         Loading activities...
       </main>
     )
