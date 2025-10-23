@@ -57,7 +57,7 @@ export default function ActivitiesPage() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/videos/SO-WIN.mp4" type="video/mp4" />
+        <source src="/videos/FIND-YOUR-PASSION.mp4" type="video/mp4" />
       </video>
 
       {/* Overlay */}
@@ -79,31 +79,32 @@ export default function ActivitiesPage() {
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {activities.map((activity) => (
-              <div
-                key={activity.id}
-                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:bg-white/20 transition-all duration-300"
-              >
-                <h2 className="text-2xl font-semibold mb-1">{activity.title}</h2>
-                <p className="text-green-300 font-medium">{activity.sport}</p>
+              <Link href={`/activities/${activity.id}`} key={activity.id}>
+                <div
+                  className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:bg-white/20 transition-all duration-300"
+                >
+                  <h2 className="text-2xl font-semibold mb-1">{activity.title}</h2>
+                  <p className="text-green-300 font-medium italic">{activity.sport}</p>
 
-                <div className="mt-3">
-                <p className="text-gray-300 text-sm">
-                  📍 <span className="text-gray-200">{activity.location}</span>
-                </p>
-                <p className="text-gray-300 text-sm">
-                  📅{" "}
-                  <span className="text-gray-200">
-                  {new Date(activity.date).toLocaleDateString()}
-                  </span>
-                </p>
+                  <div className="mt-3">
+                  <p className="text-gray-300 text-sm">
+                    📍 <span className="text-gray-200">{activity.location}</span>
+                  </p>
+                  <p className="text-gray-300 text-sm">
+                    📅{" "}
+                    <span className="text-gray-200">
+                    {new Date(activity.date).toLocaleDateString()}
+                    </span>
+                  </p>
+                  </div>
+
+                  {activity.creator?.name && (
+                  <p className="mt-4 text-sm text-gray-400 italic">
+                    Hosted by <span className="text-gray-200">{activity.creator.name}</span>
+                  </p>
+                  )}
                 </div>
-
-                {activity.creator?.name && (
-                <p className="mt-4 text-sm text-gray-400 italic">
-                  Hosted by <span className="text-gray-200">{activity.creator.name}</span>
-                </p>
-                )}
-              </div>
+              </Link>
             ))}
           </div>
         )}
