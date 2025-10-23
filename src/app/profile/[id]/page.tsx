@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 
 interface Activity {
   id: string;
@@ -65,7 +66,7 @@ export default function ProfilePage() {
 
       <div className="z-10 text-center px-4 animate-fadeIn">
         {user.image ? (
-          <img
+          <Image
             src={user.image}
             alt={user.name || "Profile picture"}
             className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-2 border-white/40"
