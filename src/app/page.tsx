@@ -35,7 +35,7 @@ export default function Home() {
 
       {/* 💬 Text Content */}
       <div className="relative z-10 text-center px-4 animate-fadeIn">
-        <h1 className="text-5xl md:text-7xl text-white tracking-tight drop-shadow-lg">
+        <h1 className="text-5xl md:text-7xl text-white drop-shadow-lg">
           <span className="font-extrabold">Sport</span><em>Connect</em>
         </h1>
         <p className="mt-4 text-lg md:text-2xl max-w-2xl mx-auto">

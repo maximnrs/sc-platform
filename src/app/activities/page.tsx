@@ -65,7 +65,7 @@ export default function ActivitiesPage() {
 
       <div className="relative z-10 p-20 max-w-5xl mx-auto animate-fadeIn">
         <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold tracking-tight">Activities</h1>
+        <h1 className="text-5xl italic">Activities</h1>
           <Link
             href={`/activities/create`}
             className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-all"
