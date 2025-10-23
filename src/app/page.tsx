@@ -26,7 +26,7 @@ export default function Home() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/WHY-DO-IT.mp4" type="video/mp4" />
+          <source src="/videos/FIND-YOUR-PASSION.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay for text contrast */}
@@ -58,6 +58,12 @@ export default function Home() {
               className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
             >
               Create Activity
+            </Link>
+            <Link
+              href={`/activities`}
+              className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
+            >
+              View Activities
             </Link>
             <p className="text-gray-100 text-lg">
               Welcome back, <span className="font-semibold">{session.user?.name}</span>!
