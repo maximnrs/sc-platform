@@ -21,7 +21,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
   if (!activity) return notFound()
 
   return (
-    <div className="max-w-2xl mx-auto py-10">
+    <div className="max-w-2xl mx-auto py-10 animate-fadeIn">
       <Link
         href={`/activities`}
         className="text-green-400 hover:underline transition mt-4 inline-block"

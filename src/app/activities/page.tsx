@@ -63,7 +63,7 @@ export default function ActivitiesPage() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
 
-      <div className="relative z-10 p-8 max-w-5xl mx-auto">
+      <div className="relative z-10 p-20 max-w-5xl mx-auto animate-fadeIn">
         <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold tracking-tight">Activities</h1>
           <Link
