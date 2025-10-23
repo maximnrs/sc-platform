@@ -26,7 +26,7 @@ export default function Home() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/WHY-DO-IT.mp4" type="video/mp4" />
+          <source src="/videos/FIND-YOUR-PASSION.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay for text contrast */}
