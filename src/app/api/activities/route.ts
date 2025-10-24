@@ -8,9 +8,8 @@ export async function GET() {
     const activities = await prisma.activity.findMany({
       orderBy: { date: "asc" },
       include: {
-        creator: {
-          select: { name: true },
-        },
+        createdBy: true,
+        attendees: true
       },
     })
 

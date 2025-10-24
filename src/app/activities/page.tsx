@@ -5,6 +5,11 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
+interface User {
+  id: string
+  name?: string | null
+}
+
 interface Activity {
   id: string
   title: string
@@ -12,9 +17,8 @@ interface Activity {
   location: string
   date: string
   description?: string
-  creator?: {
-    name?: string | null
-  }
+  createdBy?: User
+  attendees?: User[]
 }
 
 export default function ActivitiesPage() {
@@ -25,7 +29,7 @@ export default function ActivitiesPage() {
 
   useEffect(() => {
     if (status === "loading") return
-    if (!session) router.push("/login")  // redirect if not logged in
+    if (!session) router.push("/login")
 
     const fetchActivities = async () => {
       const res = await fetch("/api/activities")
@@ -49,7 +53,7 @@ export default function ActivitiesPage() {
 
   return (
     <main className="relative min-h-screen text-white overflow-hidden">
-      {/* 🎥 Background Video */}
+      {/* Background Video */}
       <video
         autoPlay
         loop
@@ -57,7 +61,7 @@ export default function ActivitiesPage() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/videos/FIND-YOUR-PASSION.mp4" type="video/mp4" />
+        <source src="/videos/WHY-DO-IT.mp4" type="video/mp4" />
       </video>
 
       {/* Overlay */}
@@ -65,7 +69,7 @@ export default function ActivitiesPage() {
 
       <div className="relative z-10 p-20 max-w-5xl mx-auto animate-fadeIn">
         <div className="flex justify-between items-center mb-8">
-        <h1 className="text-5xl italic">Activities</h1>
+          <h1 className="text-5xl italic">Activities</h1>
           <Link
             href={`/activities/create`}
             className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-all"
@@ -80,34 +84,36 @@ export default function ActivitiesPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {activities.map((activity) => (
               <Link href={`/activities/${activity.id}`} key={activity.id}>
-                <div
-                  className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:bg-white/20 transition-all duration-300"
-                >
+                <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:bg-white/20 transition-all duration-300">
                   <h2 className="text-2xl font-semibold mb-1">{activity.title}</h2>
                   <p className="text-green-300 font-medium italic">{activity.sport}</p>
-
                   <div className="mt-3">
-                  <p className="text-gray-300 text-sm">
-                    📍 <span className="text-gray-200">{activity.location}</span>
-                  </p>
-                  <p className="text-gray-300 text-sm">
-                    📅{" "}
-                    <span className="text-gray-200">
-                    {new Date(activity.date).toLocaleDateString()}
-                    </span>
-                  </p>
+                    <p className="text-gray-300 text-sm">
+                      📍 <span className="text-gray-200">{activity.location}</span>
+                    </p>
+                    <p className="text-gray-300 text-sm">
+                      📅 <span className="text-gray-200">{new Date(activity.date).toLocaleDateString()}</span>
+                    </p>
                   </div>
 
-                  {activity.creator?.name && (
-                  <p className="mt-4 text-sm text-gray-400 italic">
-                    Hosted by <span className="text-gray-200">{activity.creator.name}</span>
-                  </p>
+                  {activity.createdBy?.name && (
+                    <p className="mt-4 text-sm text-gray-400 italic">
+                      Hosted by <span className="text-gray-200">{activity.createdBy.name}</span>
+                    </p>
+                  )}
+
+                  {activity.attendees && activity.attendees.length > 0 && (
+                    <div className="mt-3 text-sm text-gray-300">
+                      Attendees:{" "}
+                      {activity.attendees.map((user) => user.name).join(", ")}
+                    </div>
                   )}
                 </div>
               </Link>
             ))}
           </div>
         )}
+
         <Link
           href={`/`}
           className="text-green-400 hover:underline transition mt-4 inline-block"
