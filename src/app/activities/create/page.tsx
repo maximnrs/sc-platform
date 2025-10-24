@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 export default function CreateActivityPage() {
   const router = useRouter()
   const [title, setTitle] = useState("")
-  const [sport, setSport] = useState("") // 🆕 added
+  const [sport, setSport] = useState("")
   const [location, setLocation] = useState("")
   const [date, setDate] = useState("")
   const [description, setDescription] = useState("")
