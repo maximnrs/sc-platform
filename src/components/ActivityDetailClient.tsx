@@ -98,12 +98,12 @@ export default function ActivityDetailClient({ activity }: { activity: ActivityF
       </Link>
 
       <header className="mt-4 mb-6">
-        <h1 className="text-4xl font-extrabold tracking-tight">{activity.title}</h1>
+        <h1 className="text-5xl italic">{activity.title}</h1>
         <p className="mt-2 text-green-500 font-semibold">{activity.sport}</p>
         <div className="mt-3 text-gray-300 text-sm">
           <span>📍 {activity.location}</span>
           <span className="mx-3">•</span>
-          <span>📅 {new Date(activity.date).toLocaleString()}</span>
+          <span>📅 {new Date(activity.date).toLocaleDateString()}</span>
         </div>
 
         {activity.creatorName && (
