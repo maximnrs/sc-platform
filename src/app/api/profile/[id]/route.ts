@@ -1,24 +1,28 @@
-import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server"
+import { prisma } from "@/lib/prisma"
 
-const prisma = new PrismaClient();
+export async function GET(request, { params }) {
+  const { id } = params
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
   try {
     const user = await prisma.user.findUnique({
-      where: { id: params.id },
-      include: { activities: true },
-    });
+      where: { id },
+      include: {
+        createdActivities: true,
+        activities: true,        // Joined activities
+      },
+    })
 
     if (!user) {
-      return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
+      return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
-    return new Response(JSON.stringify(user), { status: 200 });
+    return NextResponse.json({
+      ...user,
+      joinedActivities: user.activities,
+      activities: undefined,
+    })
   } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch user" }, { status: 500 })
   }
 }
