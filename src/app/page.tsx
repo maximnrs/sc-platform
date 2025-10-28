@@ -66,7 +66,7 @@ export default function Home() {
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/register"
-              className="px-6 py-3 bg-green-600 text-white text-lg rounded-full hover:bg-transparent hover:text-green-600 hover:border-2 hover:border-green-600 border-transparent border-2 transition-all duration-300 shadow-lg hover:italic"
+              className="px-6 py-3 bg-green-600 text-white text-lg rounded-full hover:bg-transparent hover:text-green-600 hover:border-2 hover:border-green-600 border-transparent border-2 transition-all duration-300 shadow-lg"
             >
               Get Started
             </Link>
