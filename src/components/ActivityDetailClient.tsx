@@ -148,7 +148,7 @@ export default function ActivityDetailClient({ activity }: { activity: ActivityF
         </div>
       </section>
 
-      {/* Attendees - Middle of page (premium mini cards) */}
+      {/* Attendees */}
       <section className="grid gap-3">
         {attendees.length === 0 ? (
           <p className="text-gray-400">No attendees yet — be the first to join.</p>
@@ -159,7 +159,7 @@ export default function ActivityDetailClient({ activity }: { activity: ActivityF
                 key={a.id}
                 className="flex items-center gap-4 p-4 rounded-xl bg-white/6 hover:bg-white/10 transition"
               >
-                {/* Premium initial avatar: dark base + green-600 ring */}
+                {/* Initials avatar */}
                 <div
                   className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold text-white"
                   style={{
@@ -170,7 +170,6 @@ export default function ActivityDetailClient({ activity }: { activity: ActivityF
                     position: "relative",
                   }}
                 >
-                  {/* green ring */}
                   <span
                     className="absolute -inset-[2px] rounded-full pointer-events-none"
                     style={{
@@ -184,8 +183,6 @@ export default function ActivityDetailClient({ activity }: { activity: ActivityF
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <div className="text-gray-100 font-medium truncate">{a.name}</div>
-                    {/* optional: small role/label */}
-                    {/* <div className="text-xs text-gray-400">Player</div> */}
                   </div>
                   <div className="text-sm text-gray-400">Member</div>
                 </div>
