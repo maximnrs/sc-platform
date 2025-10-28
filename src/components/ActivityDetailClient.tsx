@@ -12,7 +12,7 @@ type ActivityForClient = {
   sport: string
   location: string
   description: string
-  date: string // ISO
+  date: string
   createdById: string
   creatorName: string | null
   attendees: Attendee[]
@@ -49,7 +49,6 @@ export default function ActivityDetailClient({ activity }: { activity: ActivityF
       const res = await fetch(`/api/activities/${activity.id}/join`, { method: "POST" })
       const data = await res.json()
       if (res.ok) {
-        // optimistic: add current user to attendees
         setAttendees((prev) => [
           ...prev,
           { id: userId as string, name: session.user?.name ?? (session.user?.email ?? "Unknown") },
@@ -92,7 +91,7 @@ export default function ActivityDetailClient({ activity }: { activity: ActivityF
   }
 
   return (
-    <article className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-2xl">
+    <article className="bg-white/5 backdrop-blur-md p-8 rounded-2xl shadow-2xl animate-fadeIn">
       <Link href="/activities" className="text-sm text-gray-300 hover:text-white underline">
         ← Back to activities
       </Link>
