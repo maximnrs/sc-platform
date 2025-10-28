@@ -26,7 +26,9 @@ export async function POST(req: Request) {
         location,
         date: new Date(date),
         description,
-        createdBy: session.user.id,
+        createdBy: {
+          connect: { id: session.user.id },
+        },
       },
     })
 

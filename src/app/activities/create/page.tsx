@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 export default function CreateActivityPage() {
   const router = useRouter()
   const [title, setTitle] = useState("")
-  const [sport, setSport] = useState("") // 🆕 added
+  const [sport, setSport] = useState("")
   const [location, setLocation] = useState("")
   const [date, setDate] = useState("")
   const [description, setDescription] = useState("")
@@ -54,7 +54,7 @@ export default function CreateActivityPage() {
         onSubmit={handleSubmit}
         className="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl animate-fadeIn"
       >
-        <h1 className="text-3xl font-bold mb-6 text-center text-white tracking-tight">
+        <h1 className="text-3xl font-bold mb-6 text-center text-white">
           Create New Activity
         </h1>
 

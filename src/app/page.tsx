@@ -2,7 +2,6 @@
 
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import LogoutButton from "@/components/LogoutButton"
 
 export default function Home() {
   const { data: session, status } = useSession()
@@ -35,7 +34,7 @@ export default function Home() {
 
       {/* 💬 Text Content */}
       <div className="relative z-10 text-center px-4 animate-fadeIn">
-        <h1 className="text-5xl md:text-7xl text-white tracking-tight drop-shadow-lg">
+        <h1 className="text-5xl md:text-7xl text-white drop-shadow-lg">
           <span className="font-extrabold">Sport</span><em>Connect</em>
         </h1>
         <p className="mt-4 text-lg md:text-2xl max-w-2xl mx-auto">
@@ -46,35 +45,28 @@ export default function Home() {
         </p>
 
         {session ? (
-          <div className="space-y-4">
-            <Link
-              href={`/profile/${session.user.id}`}
-              className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
-            >
-              View Profile
-            </Link>
-            <Link
-              href={`/activities/create`}
-              className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
-            >
-              Create Activity
-            </Link>
+          <div className="space-y-4 space-x-4 mt-10">
             <Link
               href={`/activities`}
-              className="px-4 py-2 bg-white text-black rounded-full mt-4 inline-block hover:bg-gray-200 transition"
+              className="px-6 py-4 bg-green-600 text-white text-lg rounded-full hover:bg-transparent hover:text-green-600 hover:border-2 hover:border-green-600 border-transparent border-2 transition-all duration-300 shadow-lg"
             >
               View Activities
             </Link>
-            <p className="text-gray-100 text-lg">
+            <Link
+              href={`/profile/${session.user.id}`}
+              className="px-6 py-4 bg-transparent border-2 border-white text-white text-lg rounded-full hover:bg-white hover:text-black transition-all duration-300"
+            >
+              View Profile
+            </Link>
+            <p className="text-gray-100 text-lg mt-10">
               Welcome back, <span className="font-semibold">{session.user?.name}</span>!
             </p>
-            <LogoutButton />
           </div>
         ) : (
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/register"
-              className="px-6 py-3 bg-green-600 text-white text-lg rounded-full hover:bg-transparent hover:text-green-600 hover:border-2 hover:border-green-600 border-transparent border-2 transition-all duration-300 shadow-lg"
+              className="px-6 py-3 bg-green-600 text-white text-lg rounded-full hover:bg-transparent hover:text-green-600 hover:border-2 hover:border-green-600 border-transparent border-2 transition-all duration-300 shadow-lg hover:italic"
             >
               Get Started
             </Link>
