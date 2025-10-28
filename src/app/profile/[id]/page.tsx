@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 import LogoutButton from "@/components/LogoutButton"
 
 interface Activity {
@@ -59,17 +58,9 @@ export default function ProfilePage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black text-white">
       <div className="z-10 text-center px-4 animate-fadeIn">
-        {user.image ? (
-          <Image
-            src={user.image}
-            alt={user.name || "Profile picture"}
-            className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-white/40"
-          />
-        ) : (
-          <div className="w-20 h-20 rounded-full mx-auto mb-4 bg-white/10 flex items-center justify-center text-3xl font-bold border-2 border-green-600/40">
-            {user.name?.charAt(0) || "?"}
-          </div>
-        )}
+        <div className="w-20 h-20 rounded-full mx-auto mb-4 bg-white/10 flex items-center justify-center text-3xl font-bold border-2 border-green-600/40">
+          {user.name?.charAt(0) || "?"}
+        </div>
 
         <h1 className="text-4xl italic">{user.name || "Username not set"}</h1>
         <p className="mt-2 text-gray-300">{user.sport || "Sport not set"}</p>
