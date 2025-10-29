@@ -1,41 +1,28 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { authOptions } from "../../../auth/[...nextauth]/route"
 import { prisma } from "@/lib/prisma"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id: activityId } = await context.params
   const session = await getServerSession(authOptions)
 
   if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 })
   }
 
-  const activityId = params.id
-  const userId = session.user.id
+  try {
+    await prisma.activity.update({
+      where: { id: activityId },
+      data: { attendees: { connect: { id: session.user.id } } },
+    })
 
-  // Check if already joined
-  const existing = await prisma.activity.findFirst({
-    where: {
-      id: activityId,
-      attendees: {
-        some: { id: userId },
-      },
-    },
-  })
-
-  if (existing) {
-    return NextResponse.json({ error: "Already joined" }, { status: 400 })
+    return NextResponse.json({ message: "Joined activity" })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: "Failed to join activity" }, { status: 500 })
   }
-
-  // Add relation
-  await prisma.activity.update({
-    where: { id: activityId },
-    data: {
-      attendees: {
-        connect: { id: userId },
-      },
-    },
-  })
-
-  return NextResponse.json({ message: "Joined successfully" })
 }

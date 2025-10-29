@@ -34,7 +34,7 @@ export default function EditProfilePage() {
 
     if (res.ok) {
       setMessage("✅ Profile updated successfully!")
-      setTimeout(() => router.push(`/profile/${session.user.id}`), 1500)
+      setTimeout(() => router.push(`/profile/${session?.user.id}`), 1500)
     } else {
       setMessage("❌ Failed to update profile.")
     }
@@ -126,7 +126,7 @@ export default function EditProfilePage() {
 
         <p className="mt-4 text-center text-gray-300">
           <Link
-            href={`/profile/${session.user.id}`}
+            href={`/profile/${session?.user.id}`}
             className="text-green-400 hover:underline transition"
           >
             ← Back to profile
